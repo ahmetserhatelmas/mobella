@@ -7,15 +7,18 @@ export function isSupabaseConfigured(): boolean {
   return url.length > 0 && !url.includes("your-project");
 }
 
+type SupabaseQueryResult<T> = { data: T | null; error: unknown };
+
+/** Supabase `.from().select()` zinciri `Promise` değil `PromiseLike` döndürür; Vercel build buna takılıyordu. */
 export async function safeQuery<T>(
-  fn: () => Promise<{ data: T | null; error: unknown }>
+  fn: () => PromiseLike<SupabaseQueryResult<T>>
 ): Promise<T | null> {
   if (!isSupabaseConfigured()) return null;
 
   try {
     const result = await Promise.race([
-      fn(),
-      new Promise<{ data: null; error: string }>((resolve) =>
+      Promise.resolve(fn()),
+      new Promise<SupabaseQueryResult<T>>((resolve) =>
         setTimeout(() => resolve({ data: null, error: "timeout" }), 5000)
       ),
     ]);
