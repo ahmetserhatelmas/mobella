@@ -1,0 +1,163 @@
+{
+  "nav": {
+    "experiences": "Deneyimler",
+    "combos": "Kombolar",
+    "story": "Hikaye",
+    "guide": "Rehber",
+    "faq": "SSS",
+    "contact": "İletişim",
+    "corporate": "Kurumsal",
+    "bookNow": "Rezervasyon Yap",
+    "menu": "Menü"
+  },
+  "hero": {
+    "tagline": "Tatil değil, deneyim.",
+    "cta_primary": "Deneyimleri Gör",
+    "cta_secondary": "İletişime Geç"
+  },
+  "home": {
+    "why_title": "Neden Mobella?",
+    "why_1_title": "Maksimum 12 Kişi",
+    "why_1_desc": "Küçük gruplarla premium hizmet. Kalabalık değil, kaliteli.",
+    "why_2_title": "Yerel Rehberler",
+    "why_2_desc": "Her rotada o bölgeyi tanıyan, yerel dili konuşan uzmanlar.",
+    "why_3_title": "Şeffaf Fiyat",
+    "why_3_desc": "Dahil olanlar ve olmayanlar baştan netleştirilir. Sürpriz yok.",
+    "products_title": "Deneyimler",
+    "testimonials_title": "Katılımcılar Ne Diyor?",
+    "combos_title": "Kombo Paketler",
+    "newsletter_title": "Sezon Takvimini Al",
+    "newsletter_desc": "Yeni tarihler ve özel fırsatlar için bültenimize kaydol.",
+    "newsletter_placeholder": "E-posta adresin",
+    "newsletter_cta": "Sezon Takvimini Al",
+    "newsletter_kvkk": "KVKK kapsamında verilerimin işlenmesine onay veriyorum.",
+    "newsletter_success": "Kaydın alındı, teşekkürler!"
+  },
+  "experience": {
+    "duration": "Süre",
+    "group_size": "Grup",
+    "difficulty": "Zorluk",
+    "season": "Sezon",
+    "price_from": "itibaren",
+    "view": "İncele",
+    "book": "Rezerve Et",
+    "view_dates": "Tarihleri Gör",
+    "included": "Dahil Olanlar",
+    "not_included": "Dahil Olmayanlar",
+    "program": "Program",
+    "know_before": "Bilmen Gerekenler",
+    "dates_prices": "Tarih ve Fiyatlar",
+    "booking_title": "Rezervasyon",
+    "select_date": "Tarih Seç",
+    "persons": "Kişi Sayısı",
+    "total": "Toplam",
+    "related": "Benzer Deneyimler",
+    "faq": "Sıkça Sorulanlar",
+    "gallery": "Galeri",
+    "difficulty_easy": "Kolay",
+    "difficulty_medium": "Orta",
+    "difficulty_hard": "Zor",
+    "spots_left": "yer kaldı",
+    "sold_out": "Doldu",
+    "person": "kişi",
+    "nights": "gece",
+    "days": "gün",
+    "reserve_form_name": "Ad Soyad",
+    "reserve_form_email": "E-posta",
+    "reserve_form_phone": "Telefon",
+    "reserve_form_note": "Özel İstek / Not",
+    "reserve_form_submit": "Rezervasyon Talebi Gönder",
+    "reserve_success": "Rezervasyon talebiniz alındı! En kısa sürede sizinle iletişime geçeceğiz.",
+    "reserve_kvkk": "Kişisel verilerimin KVKK kapsamında işlenmesine onay veriyorum."
+  },
+  "experiences_page": {
+    "title": "Deneyimler",
+    "subtitle": "İzmir merkezli Ege ve Akdeniz'in en seçkin rotaları. Her biri küçük grup, yerel rehber ve şeffaf fiyatla.",
+    "all": "Tümü",
+    "filter_active": "Aktif Sezon"
+  },
+  "combos": {
+    "title": "Kombo Paketler",
+    "subtitle": "Deneyimleri birleştir, daha fazlasını yaşa.",
+    "combo_a_title": "Çeşme + Tekne",
+    "combo_a_desc": "Cumartesi sörf, Pazar tekne. Bedensel ve dinlendirici denge.",
+    "combo_b_title": "Likya + Tekne",
+    "combo_b_desc": "3 gün yürüyüş, 4. gün Fethiye'den 12 Adalar tekne turu.",
+    "combo_c_title": "Doğa + Tekne",
+    "combo_c_desc": "Akyaka/Datça doğa turu sonrası Gökova körfezinde günübirlik tekne.",
+    "inquire": "Fiyat Al"
+  },
+  "story": {
+    "title": "Hikaye",
+    "subtitle": "Mobella nasıl doğdu?"
+  },
+  "guide": {
+    "title": "Rehber",
+    "subtitle": "Hazırlık tavsiyeleri, ekipman önerileri, sezon rehberleri."
+  },
+  "faq": {
+    "title": "Sıkça Sorulanlar",
+    "subtitle": "Aklındaki soruların cevapları burada."
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Soru sormak veya rezervasyon için bize ulaş.",
+    "name": "Ad Soyad",
+    "email": "E-posta",
+    "phone": "Telefon (opsiyonel)",
+    "message": "Mesajın",
+    "send": "Gönder",
+    "success": "Mesajın alındı, en kısa sürede döneceğiz!",
+    "address": "Adres",
+    "whatsapp": "WhatsApp ile Yaz",
+    "email_label": "E-posta"
+  },
+  "corporate": {
+    "title": "Kurumsal",
+    "subtitle": "Yasal bilgiler, TÜRSAB belgesi ve politikalar."
+  },
+  "footer": {
+    "tagline": "Tatil değil, deneyim.",
+    "pages": "Sayfalar",
+    "legal": "Yasal",
+    "kvkk": "KVKK",
+    "cookies": "Çerez Politikası",
+    "terms": "Kullanım Şartları",
+    "rights": "Tüm hakları saklıdır.",
+    "tursab": "TÜRSAB Üyesi"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "experiences": "Deneyimler",
+    "dates": "Tarihler",
+    "bookings": "Rezervasyonlar",
+    "newsletter": "Bülten",
+    "status_pending": "Bekliyor",
+    "status_confirmed": "Onaylandı",
+    "status_cancelled": "İptal",
+    "confirm": "Onayla",
+    "cancel": "İptal Et",
+    "total_bookings": "Toplam Rezervasyon",
+    "pending_bookings": "Bekleyen",
+    "confirmed_bookings": "Onaylanan"
+  },
+  "common": {
+    "back": "Geri",
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu.",
+    "not_found": "Sayfa bulunamadı.",
+    "read_more": "Devamını Oku",
+    "close": "Kapat",
+    "save": "Kaydet",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "add": "Ekle",
+    "search": "Ara",
+    "filter": "Filtrele",
+    "all": "Tümü",
+    "night": "gece",
+    "day": "gün",
+    "person": "kişi",
+    "tl": "₺"
+  }
+}

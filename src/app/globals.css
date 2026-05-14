@@ -1,26 +1,109 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: oklch(0.99 0 0);
+  --color-foreground: oklch(0.145 0 0);
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.145 0 0);
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.145 0 0);
+  --color-primary: oklch(0.32 0.09 225);
+  --color-primary-foreground: oklch(0.985 0 0);
+  --color-secondary: oklch(0.97 0.01 75);
+  --color-secondary-foreground: oklch(0.21 0 0);
+  --color-muted: oklch(0.97 0 0);
+  --color-muted-foreground: oklch(0.556 0 0);
+  --color-accent: oklch(0.65 0.18 28);
+  --color-accent-foreground: oklch(0.985 0 0);
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-border: oklch(0.922 0 0);
+  --color-input: oklch(0.922 0 0);
+  --color-ring: oklch(0.32 0.09 225);
+  --radius: 0.625rem;
+  --radius-xs: calc(var(--radius) * 0.5);
+  --radius-sm: calc(var(--radius) * 0.75);
+  --radius-md: calc(var(--radius) * 0.875);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+
+  /* Mobella brand colors */
+  --color-mobella-blue: #0A4D68;
+  --color-mobella-sand: #F5E6CA;
+  --color-mobella-coral: #FF6B47;
+  --color-mobella-dark: #1F2937;
+
+  /* Fonts */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "DM Serif Display", "Georgia", serif;
+  --font-mono: ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--color-border);
+  outline-color: var(--color-ring);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Experience card hover */
+.experience-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.experience-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(10, 77, 104, 0.15);
+}
+
+/* Hero video overlay */
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(10, 77, 104, 0.45) 50%,
+    rgba(10, 77, 104, 0.72) 100%
+  );
+}
+
+/* Ken Burns slow zoom — cinematic pan effect on hero background */
+@keyframes kenburns {
+  0%   { transform: scale(1.08) translate(0%, 0%); }
+  25%  { transform: scale(1.12) translate(-1.5%, -1%); }
+  50%  { transform: scale(1.10) translate(1.5%, -0.5%); }
+  75%  { transform: scale(1.06) translate(0.5%, 1.5%); }
+  100% { transform: scale(1.08) translate(0%, 0%); }
+}
+
+.hero-kenburns {
+  animation: kenburns 24s ease-in-out infinite;
+  transform-origin: center center;
+  z-index: 0;
+  will-change: transform;
+}
+
+/* WhatsApp button pulse */
+@keyframes whatsapp-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-btn {
+  animation: whatsapp-pulse 2.5s infinite;
 }

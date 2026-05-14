@@ -1,0 +1,163 @@
+{
+  "nav": {
+    "experiences": "Experiences",
+    "combos": "Combos",
+    "story": "Story",
+    "guide": "Guide",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "corporate": "Corporate",
+    "bookNow": "Book Now",
+    "menu": "Menu"
+  },
+  "hero": {
+    "tagline": "Not a holiday. An experience.",
+    "cta_primary": "Explore Experiences",
+    "cta_secondary": "Get in Touch"
+  },
+  "home": {
+    "why_title": "Why Mobella?",
+    "why_1_title": "Max 12 People",
+    "why_1_desc": "Premium service with small groups. Quality over quantity.",
+    "why_2_title": "Local Guides",
+    "why_2_desc": "Experts who know every route, speak the local language.",
+    "why_3_title": "Transparent Pricing",
+    "why_3_desc": "What's included and excluded is clear from the start. No surprises.",
+    "products_title": "Experiences",
+    "testimonials_title": "What Participants Say",
+    "combos_title": "Combo Packages",
+    "newsletter_title": "Get the Season Calendar",
+    "newsletter_desc": "Subscribe for new dates and exclusive offers.",
+    "newsletter_placeholder": "Your email address",
+    "newsletter_cta": "Get Season Calendar",
+    "newsletter_kvkk": "I consent to the processing of my personal data.",
+    "newsletter_success": "Subscription confirmed, thank you!"
+  },
+  "experience": {
+    "duration": "Duration",
+    "group_size": "Group",
+    "difficulty": "Difficulty",
+    "season": "Season",
+    "price_from": "from",
+    "view": "Explore",
+    "book": "Book Now",
+    "view_dates": "View Dates",
+    "included": "What's Included",
+    "not_included": "Not Included",
+    "program": "Itinerary",
+    "know_before": "Good to Know",
+    "dates_prices": "Dates & Prices",
+    "booking_title": "Reservation",
+    "select_date": "Select Date",
+    "persons": "Number of People",
+    "total": "Total",
+    "related": "Related Experiences",
+    "faq": "FAQ",
+    "gallery": "Gallery",
+    "difficulty_easy": "Easy",
+    "difficulty_medium": "Moderate",
+    "difficulty_hard": "Hard",
+    "spots_left": "spots left",
+    "sold_out": "Sold Out",
+    "person": "person",
+    "nights": "nights",
+    "days": "days",
+    "reserve_form_name": "Full Name",
+    "reserve_form_email": "Email",
+    "reserve_form_phone": "Phone",
+    "reserve_form_note": "Special Request / Note",
+    "reserve_form_submit": "Send Booking Request",
+    "reserve_success": "Your booking request has been received! We'll be in touch shortly.",
+    "reserve_kvkk": "I consent to the processing of my personal data."
+  },
+  "experiences_page": {
+    "title": "Experiences",
+    "subtitle": "Izmir-based Aegean and Mediterranean routes. Small groups, local guides, transparent pricing.",
+    "all": "All",
+    "filter_active": "Active Season"
+  },
+  "combos": {
+    "title": "Combo Packages",
+    "subtitle": "Combine experiences, live more.",
+    "combo_a_title": "Çeşme + Boat",
+    "combo_a_desc": "Saturday surfing, Sunday on the boat. Physical and restful balance.",
+    "combo_b_title": "Lycia + Boat",
+    "combo_b_desc": "3 days trekking, 4th day boat tour from Fethiye to 12 Islands.",
+    "combo_c_title": "Nature + Boat",
+    "combo_c_desc": "Akyaka/Datça nature tour followed by a day boat trip in the Gulf of Gökova.",
+    "inquire": "Get a Quote"
+  },
+  "story": {
+    "title": "Story",
+    "subtitle": "How was Mobella born?"
+  },
+  "guide": {
+    "title": "Guide",
+    "subtitle": "Preparation tips, gear recommendations, season guides."
+  },
+  "faq": {
+    "title": "FAQ",
+    "subtitle": "Answers to your questions."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Reach out for questions or reservations.",
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone (optional)",
+    "message": "Your Message",
+    "send": "Send",
+    "success": "Message received, we'll get back to you soon!",
+    "address": "Address",
+    "whatsapp": "Write on WhatsApp",
+    "email_label": "Email"
+  },
+  "corporate": {
+    "title": "Corporate",
+    "subtitle": "Legal information, TÜRSAB certificate and policies."
+  },
+  "footer": {
+    "tagline": "Not a holiday. An experience.",
+    "pages": "Pages",
+    "legal": "Legal",
+    "kvkk": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "terms": "Terms of Use",
+    "rights": "All rights reserved.",
+    "tursab": "TÜRSAB Member"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "experiences": "Experiences",
+    "dates": "Dates",
+    "bookings": "Bookings",
+    "newsletter": "Newsletter",
+    "status_pending": "Pending",
+    "status_confirmed": "Confirmed",
+    "status_cancelled": "Cancelled",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "total_bookings": "Total Bookings",
+    "pending_bookings": "Pending",
+    "confirmed_bookings": "Confirmed"
+  },
+  "common": {
+    "back": "Back",
+    "loading": "Loading...",
+    "error": "An error occurred.",
+    "not_found": "Page not found.",
+    "read_more": "Read More",
+    "close": "Close",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "all": "All",
+    "night": "night",
+    "day": "day",
+    "person": "person",
+    "tl": "₺"
+  }
+}
