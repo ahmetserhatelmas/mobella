@@ -18,6 +18,20 @@ interface ProgramDay {
   items?: string[];
 }
 
+function asStringArray(value: unknown): string[] {
+  return Array.isArray(value) ? value.filter((x): x is string => typeof x === "string") : [];
+}
+
+function asProgramDays(program: Json | null | undefined): ProgramDay[] {
+  if (!program) return [];
+  if (!Array.isArray(program)) return [];
+  return program
+    .filter((day) => day !== null && typeof day === "object" && !Array.isArray(day))
+    .map((day) => day as ProgramDay);
+}
+
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   if (!isSupabaseConfigured()) return [];
   try {
@@ -73,7 +87,7 @@ export default async function ExperienceDetailPage({
   if (!exp) notFound();
 
   const today = new Date().toISOString().split("T")[0];
-  const [dates, faqs, relatedExps] = await Promise.all([
+  const [datesRaw, faqsRaw, relatedExpsRaw] = await Promise.all([
     safeQuery<ExperienceDate[]>(() =>
       supabase.from("experience_dates").select("*")
         .eq("experience_id", exp!.id).eq("is_active", true)
@@ -90,14 +104,19 @@ export default async function ExperienceDetailPage({
     ),
   ]);
 
+  const dates = Array.isArray(datesRaw) ? datesRaw : [];
+  const faqs = Array.isArray(faqsRaw) ? faqsRaw : [];
+  const relatedExps = Array.isArray(relatedExpsRaw) ? relatedExpsRaw : [];
+
   const name = locale === "tr" ? exp.name_tr : exp.name_en;
   const tagline = locale === "tr" ? exp.tagline_tr : exp.tagline_en;
   const description = locale === "tr" ? exp.description_tr : exp.description_en;
-  const included = locale === "tr" ? exp.included_tr : exp.included_en;
-  const notIncluded = locale === "tr" ? exp.not_included_tr : exp.not_included_en;
-  const program = locale === "tr" ? exp.program_tr : exp.program_en;
+  const included = asStringArray(locale === "tr" ? exp.included_tr : exp.included_en);
+  const notIncluded = asStringArray(locale === "tr" ? exp.not_included_tr : exp.not_included_en);
+  const programDays = asProgramDays(locale === "tr" ? exp.program_tr : exp.program_en);
   const season = locale === "tr" ? exp.season_tr : exp.season_en;
-  const gallery = exp.gallery_urls ?? [];
+  const gallery = asStringArray(exp.gallery_urls ?? []);
+  const basePrice = Number(exp.base_price ?? 0);
 
   const SLUG_COVER: Record<string, string> = {
     "cesme-ruzgar-raket": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=1920&q=85",
@@ -110,11 +129,15 @@ export default async function ExperienceDetailPage({
     exp.cover_image_url ??
     "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=85";
 
+  const difficultyKey =
+    exp.difficulty === "easy" || exp.difficulty === "medium" || exp.difficulty === "hard"
+      ? exp.difficulty
+      : "easy";
   const difficultyLabel = {
     easy: locale === "tr" ? "Kolay" : "Easy",
     medium: locale === "tr" ? "Orta" : "Moderate",
     hard: locale === "tr" ? "Zor" : "Hard",
-  }[exp.difficulty ?? "easy"];
+  }[difficultyKey];
 
   const durationLabel =
     locale === "tr"
@@ -175,7 +198,7 @@ export default async function ExperienceDetailPage({
                 </span>
               )}
               <span className="font-bold text-white text-lg ml-auto">
-                ₺{exp.base_price.toLocaleString("tr-TR")}
+                ₺{basePrice.toLocaleString("tr-TR")}
                 <span className="font-normal text-sm text-white/60 ml-1">
                   /{locale === "tr" ? "kişi" : "person"}
                 </span>
@@ -225,37 +248,34 @@ export default async function ExperienceDetailPage({
             )}
 
             {/* Program */}
-            {program && (
+            {programDays.length > 0 && (
               <div>
                 <h2 className="font-serif text-2xl text-[#1F2937] mb-4">{t("program")}</h2>
                 <div className="space-y-4">
-                  {(program as Json[]).map((day: Json, i) => {
-                    const d = day as ProgramDay;
-                    return (
-                      <div key={i} className="border-l-2 border-[#0A4D68]/20 pl-4">
-                        <h3 className="font-semibold text-[#0A4D68] mb-2">
-                          {d.day || d.title || `${locale === "tr" ? "Gün" : "Day"} ${i + 1}`}
-                        </h3>
-                        {d.items && (
-                          <ul className="space-y-1">
-                            {d.items.map((item: string, j: number) => (
-                              <li key={j} className="text-gray-600 text-sm flex gap-2">
-                                <span className="text-[#FF6B47] mt-0.5">•</span>
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    );
-                  })}
+                  {programDays.map((d, i) => (
+                    <div key={i} className="border-l-2 border-[#0A4D68]/20 pl-4">
+                      <h3 className="font-semibold text-[#0A4D68] mb-2">
+                        {d.day || d.title || `${locale === "tr" ? "Gün" : "Day"} ${i + 1}`}
+                      </h3>
+                      {Array.isArray(d.items) && d.items.length > 0 && (
+                        <ul className="space-y-1">
+                          {d.items.map((item, j) => (
+                            <li key={j} className="text-gray-600 text-sm flex gap-2">
+                              <span className="text-[#FF6B47] mt-0.5">•</span>
+                              {typeof item === "string" ? item : String(item)}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
 
             {/* Included / Not included */}
             <div className="grid sm:grid-cols-2 gap-6">
-              {included && included.length > 0 && (
+              {included.length > 0 && (
                 <div>
                   <h2 className="font-semibold text-[#1F2937] mb-3 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-green-600" />
@@ -271,7 +291,7 @@ export default async function ExperienceDetailPage({
                   </ul>
                 </div>
               )}
-              {notIncluded && notIncluded.length > 0 && (
+              {notIncluded.length > 0 && (
                 <div>
                   <h2 className="font-semibold text-[#1F2937] mb-3 flex items-center gap-2">
                     <XCircle className="w-5 h-5 text-red-400" />
@@ -304,7 +324,7 @@ export default async function ExperienceDetailPage({
             </div>
 
             {/* FAQ */}
-            {faqs && faqs.length > 0 && (
+            {faqs.length > 0 && (
               <div>
                 <h2 className="font-serif text-2xl text-[#1F2937] mb-4">{t("faq")}</h2>
                 <Accordion type="single" collapsible className="space-y-2">
@@ -314,7 +334,7 @@ export default async function ExperienceDetailPage({
                     return (
                       <AccordionItem
                         key={faq.id}
-                        value={faq.id}
+                        value={String(faq.id)}
                         className="border border-gray-200 rounded-xl px-4"
                       >
                         <AccordionTrigger className="text-sm font-medium text-[#1F2937] text-left">
@@ -335,7 +355,7 @@ export default async function ExperienceDetailPage({
           <div>
             <BookingForm
               experienceId={exp.id}
-              dates={dates ?? []}
+              dates={dates}
               locale={locale}
             />
           </div>
