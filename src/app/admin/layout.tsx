@@ -3,9 +3,7 @@ import { Mountain, Calendar, Package, Users, Mail, MessageSquare } from "lucide-
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr">
-      <body className="antialiased bg-gray-50 min-h-screen">
-        <div className="flex h-screen overflow-hidden">
+    <div className="antialiased bg-gray-50 min-h-screen flex h-screen overflow-hidden">
           {/* Sidebar */}
           <aside className="w-64 bg-[#1F2937] text-white flex flex-col shrink-0">
             <div className="p-5 border-b border-white/10">
@@ -52,8 +50,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           {/* Main */}
           <main className="flex-1 overflow-auto">{children}</main>
-        </div>
-      </body>
-    </html>
+    </div>
   );
 }
