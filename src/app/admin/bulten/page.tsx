@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
+import { CopyEmailsButton } from "./CopyEmailsButton";
 
 type Subscriber = { id: string; email: string; kvkk_consent: boolean; subscribed_at: string };
 
@@ -22,15 +23,7 @@ export default async function AdminBultenPage() {
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
         <div className="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
           <p className="text-sm font-medium text-gray-600">E-posta Listesi</p>
-          <button
-            onClick={() => {
-              const emails = subscribers?.map((s) => s.email).join(", ") ?? "";
-              navigator.clipboard.writeText(emails);
-            }}
-            className="text-xs text-[#0A4D68] hover:text-[#FF6B47] transition-colors font-medium"
-          >
-            Tümünü Kopyala
-          </button>
+          <CopyEmailsButton emails={(subscribers ?? []).map((s) => s.email)} />
         </div>
         <table className="w-full text-sm">
           <thead>
