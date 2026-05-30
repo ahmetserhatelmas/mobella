@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mountain, Calendar, Mail, MessageSquare } from "lucide-react";
+import { Mountain, Calendar, Mail, MessageSquare, Package } from "lucide-react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
