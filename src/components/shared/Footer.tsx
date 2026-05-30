@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Mountain } from "lucide-react";
+import Image from "next/image";
 
 interface FooterProps {
   locale: string;
@@ -31,11 +31,14 @@ export function Footer({ locale }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-full bg-[#FF6B47] flex items-center justify-center">
-                <Mountain className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-serif text-2xl font-semibold">Mobella</span>
+            <Link href="/" className="flex items-center mb-4">
+              <Image
+                src="/mobella-logo.png"
+                alt="Mobella"
+                width={120}
+                height={48}
+                className="h-10 w-auto object-contain brightness-0 invert"
+              />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-4">
               {t("tagline")}

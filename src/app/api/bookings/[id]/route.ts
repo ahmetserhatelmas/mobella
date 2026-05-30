@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function PATCH(
@@ -12,7 +12,7 @@ export async function PATCH(
     return NextResponse.json({ error: "Geçersiz durum." }, { status: 400 });
   }
 
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { error } = await supabase
     .from("bookings")
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

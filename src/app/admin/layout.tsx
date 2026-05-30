@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mountain, Calendar, Package, Users, Mail, MessageSquare } from "lucide-react";
+import Image from "next/image";
+import { Mountain, Calendar, Mail, MessageSquare } from "lucide-react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -8,13 +9,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <aside className="w-64 bg-[#1F2937] text-white flex flex-col shrink-0">
             <div className="p-5 border-b border-white/10">
               <Link href="/admin" className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[#FF6B47] flex items-center justify-center">
-                  <Mountain className="w-4 h-4 text-white" />
-                </div>
-                <div>
-                  <p className="font-semibold text-sm">Mobella</p>
-                  <p className="text-xs text-white/40">Admin Panel</p>
-                </div>
+                <Image
+                  src="/mobella-logo.png"
+                  alt="Mobella"
+                  width={90}
+                  height={36}
+                  className="h-8 w-auto object-contain brightness-0 invert"
+                />
+                <p className="text-xs text-white/40 mt-1">Admin Panel</p>
               </Link>
             </div>
 

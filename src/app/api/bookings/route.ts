@@ -17,6 +17,7 @@ export async function POST(req: Request) {
       num_persons,
       special_requests,
       total_price,
+      user_id,
     } = body;
 
     if (!experience_date_id || !customer_name || !customer_email || !customer_phone) {
@@ -41,6 +42,7 @@ export async function POST(req: Request) {
       booking_ref: generateRef(),
       experience_id,
       experience_date_id,
+      user_id: user_id ?? null,
       customer_name,
       customer_email,
       customer_phone,

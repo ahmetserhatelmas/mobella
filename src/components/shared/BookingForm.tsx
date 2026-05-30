@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +10,8 @@ import { Loader2, CheckCircle, Calendar, Users } from "lucide-react";
 import type { ExperienceDate } from "@/lib/supabase/types";
 import { format } from "date-fns";
 import { tr, enUS } from "date-fns/locale";
+import { createClient } from "@/lib/supabase/client";
+import { Link } from "@/i18n/navigation";
 
 interface BookingFormProps {
   experienceId: string;
@@ -29,6 +31,22 @@ export function BookingForm({ experienceId, dates, locale }: BookingFormProps) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [userId, setUserId] = useState<string | null>(null);
+
+  // Prefill form from logged-in user
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) {
+        setUserId(data.user.id);
+        if (!name) {
+          const fullName = data.user.user_metadata?.full_name as string | undefined;
+          if (fullName) setName(fullName);
+        }
+        if (!email && data.user.email) setEmail(data.user.email);
+      }
+    });
+  }, []);
 
   const selectedDate = dates.find((d) => d.id === selectedDateId);
   const total = selectedDate ? selectedDate.price_per_person * persons : 0;
@@ -63,6 +81,7 @@ export function BookingForm({ experienceId, dates, locale }: BookingFormProps) {
           num_persons: persons,
           special_requests: note,
           total_price: total,
+          user_id: userId ?? undefined,
         }),
       });
       if (res.ok) {
@@ -85,7 +104,15 @@ export function BookingForm({ experienceId, dates, locale }: BookingFormProps) {
         <h3 className="font-semibold text-green-800 text-lg mb-2">
           {locale === "tr" ? "Talebiniz Alındı!" : "Request Received!"}
         </h3>
-        <p className="text-green-700 text-sm">{t("reserve_success")}</p>
+        <p className="text-green-700 text-sm mb-4">{t("reserve_success")}</p>
+        {userId && (
+          <Link
+            href="/hesabim"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-[#0A4D68] hover:underline"
+          >
+            {locale === "tr" ? "Hesabımda Takip Et →" : "Track in My Account →"}
+          </Link>
+        )}
       </div>
     );
   }

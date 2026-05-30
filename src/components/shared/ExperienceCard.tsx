@@ -12,10 +12,25 @@ const SLUG_FALLBACKS: Record<string, string> = {
     "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&q=80",
   "izmir-doga":
     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+  "mugla-doga": "/images/mugla-doga.png",
+  "antalya-doga": "/images/antalya-doga.png",
   "hafta-sonu-likyasi":
     "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80",
+  "buyuk-likya":
+    "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
   "mavi-yesil-tekne":
     "https://images.unsplash.com/photo-1758971139390-b6b9734a45c7?w=800&q=80",
+  "urla-gurme":
+    "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80",
+  "alacati-ruzgar-kampi":
+    "https://images.unsplash.com/photo-1766495106469-ffddb3ab7fa8?w=800&q=80",
+  "alanya-voleybol":
+    "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=800&q=80",
+  "fethiye-babadag": "/images/fethiye-babadag.png",
+  "kapadokya-ozel":
+    "https://images.unsplash.com/photo-1765794144925-11508ad9ba21?w=800&q=80",
+  "kas-deniz":
+    "https://images.unsplash.com/photo-1517699418036-fb5d179fef0c?w=800&q=80",
 };
 
 const DEFAULT_FALLBACK =
@@ -34,9 +49,11 @@ export function ExperienceCard({
 }: ExperienceCardProps) {
   const fallback =
     SLUG_FALLBACKS[experience.slug] ?? DEFAULT_FALLBACK;
-  const [imgSrc, setImgSrc] = useState(
-    experience.cover_image_url || fallback
-  );
+  // SLUG_FALLBACKS takes priority when explicitly set, otherwise use DB URL
+  const initialSrc = SLUG_FALLBACKS[experience.slug]
+    ? fallback
+    : experience.cover_image_url || fallback;
+  const [imgSrc, setImgSrc] = useState(initialSrc);
 
   const name = locale === "tr" ? experience.name_tr : experience.name_en;
   const tagline = locale === "tr" ? experience.tagline_tr : experience.tagline_en;

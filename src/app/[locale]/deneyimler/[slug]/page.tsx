@@ -121,8 +121,18 @@ export default async function ExperienceDetailPage({
   const SLUG_COVER: Record<string, string> = {
     "cesme-ruzgar-raket": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=1920&q=85",
     "izmir-doga": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=85",
+    "mugla-doga": "/images/mugla-doga.png",
+    "antalya-doga": "/images/antalya-doga.png",
     "hafta-sonu-likyasi": "https://images.unsplash.com/photo-1551632811-561732d1e306?w=1920&q=85",
+    "buyuk-likya": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=85",
     "mavi-yesil-tekne": "https://images.unsplash.com/photo-1758971139390-b6b9734a45c7?w=1920&q=85",
+    "urla-gurme": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=1920&q=85",
+    "alacati-ruzgar-kampi": "https://images.unsplash.com/photo-1766495106469-ffddb3ab7fa8?w=1920&q=85",
+    "alanya-voleybol": "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=1920&q=85",
+    "fethiye-babadag": "/images/fethiye-babadag.png",
+    "kapadokya-ozel":
+    "https://images.unsplash.com/photo-1765794144925-11508ad9ba21?w=1920&q=85",
+    "kas-deniz": "https://images.unsplash.com/photo-1517699418036-fb5d179fef0c?w=1920&q=85",
   };
   const coverImage =
     SLUG_COVER[exp.slug] ??
