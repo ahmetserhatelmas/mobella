@@ -169,7 +169,17 @@
     "generic_error": "Bir hata oluştu. Tekrar dene.",
     "email_in_use": "Bu e-posta adresi zaten kullanılıyor. Giriş yapmayı dene.",
     "email_confirm_note": "E-posta adresine bir onay bağlantısı gönderdik.",
-    "kvkk": "Kişisel verilerimin KVKK kapsamında işlenmesine onay veriyorum."
+    "kvkk": "Kişisel verilerimin KVKK kapsamında işlenmesine onay veriyorum.",
+    "forgot_password_title": "Şifremi Unuttum",
+    "forgot_password_subtitle": "E-posta adresini gir, sana şifre sıfırlama bağlantısı gönderelim.",
+    "send_reset_link": "Sıfırlama Bağlantısı Gönder",
+    "reset_email_sent_title": "E-posta gönderildi",
+    "reset_email_sent_note": "Şifre sıfırlama bağlantısı e-posta adresine gönderildi. Gelen kutunu kontrol et.",
+    "back_to_login": "Giriş sayfasına dön",
+    "reset_password_title": "Yeni Şifre Belirle",
+    "reset_password_subtitle": "Hesabın için yeni bir şifre oluştur.",
+    "reset_password_btn": "Şifreyi Güncelle",
+    "reset_link_invalid": "Bağlantı geçersiz veya süresi dolmuş. Tekrar dene."
   },
   "dashboard": {
     "title": "Hesabım",

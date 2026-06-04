@@ -2,54 +2,72 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter, useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Mountain, Loader2, Eye, EyeOff } from "lucide-react";
+import { Loader2, CheckCircle } from "lucide-react";
 import Image from "next/image";
 
-export default function GirisClient() {
+export default function SifremiUnuttumPage() {
   const t = useTranslations("auth");
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const from = searchParams.get("from");
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPw, setShowPw] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
+    setLoading(true);
 
     const supabase = createClient();
-    const { error: authError } = await supabase.auth.signInWithPassword({
+    const redirectTo = `${window.location.origin}/api/auth/callback?next=${encodeURIComponent("/sifre-yenile")}`;
+
+    const { error: authError } = await supabase.auth.resetPasswordForEmail(
       email,
-      password,
-    });
+      { redirectTo }
+    );
 
     if (authError) {
-      setError(t("login_error"));
+      setError(t("generic_error"));
       setLoading(false);
       return;
     }
 
-    router.push(from === "hesabim" ? "/hesabim" : "/hesabim");
-    router.refresh();
+    setSuccess(true);
+    setLoading(false);
   };
+
+  if (success) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0A4D68]/5 via-white to-[#F5E6CA]/30 flex items-center justify-center px-4 py-16">
+        <div className="w-full max-w-md">
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 sm:p-10 text-center">
+            <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="w-8 h-8 text-green-600" />
+            </div>
+            <h2 className="text-xl font-serif font-semibold text-[#1F2937] mb-2">
+              {t("reset_email_sent_title")}
+            </h2>
+            <p className="text-sm text-gray-500 mb-6">{t("reset_email_sent_note")}</p>
+            <Link href="/giris">
+              <Button className="bg-[#FF6B47] hover:bg-[#e55a38] text-white">
+                {t("login_link")}
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0A4D68]/5 via-white to-[#F5E6CA]/30 flex items-center justify-center px-4 py-16">
       <div className="w-full max-w-md">
-        {/* Card */}
         <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 sm:p-10">
-          {/* Logo */}
           <div className="flex justify-center mb-8">
             <Link href="/">
               <Image
@@ -63,10 +81,10 @@ export default function GirisClient() {
           </div>
 
           <h1 className="text-2xl font-serif font-semibold text-[#1F2937] text-center mb-1">
-            {t("login_title")}
+            {t("forgot_password_title")}
           </h1>
           <p className="text-sm text-gray-500 text-center mb-8">
-            {t("login_subtitle")}
+            {t("forgot_password_subtitle")}
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -85,42 +103,6 @@ export default function GirisClient() {
               />
             </div>
 
-            <div className="space-y-1.5">
-              <div className="flex items-center justify-between">
-                <Label className="text-sm font-medium text-gray-700">
-                  {t("password")}
-                </Label>
-                <Link
-                  href="/sifremi-unuttum"
-                  className="text-xs text-[#0A4D68] hover:underline"
-                >
-                  {t("forgot_password")}
-                </Link>
-              </div>
-              <div className="relative">
-                <Input
-                  type={showPw ? "text" : "password"}
-                  required
-                  autoComplete="current-password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="h-11 pr-10"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPw((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                >
-                  {showPw ? (
-                    <EyeOff className="w-4 h-4" />
-                  ) : (
-                    <Eye className="w-4 h-4" />
-                  )}
-                </button>
-              </div>
-            </div>
-
             {error && (
               <p className="text-sm text-red-500 bg-red-50 rounded-xl px-3 py-2">
                 {error}
@@ -135,18 +117,17 @@ export default function GirisClient() {
               {loading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
               ) : (
-                t("login_btn")
+                t("send_reset_link")
               )}
             </Button>
           </form>
 
           <p className="text-center text-sm text-gray-500 mt-6">
-            {t("no_account")}{" "}
             <Link
-              href="/kayit"
+              href="/giris"
               className="text-[#0A4D68] font-semibold hover:underline"
             >
-              {t("register_link")}
+              {t("back_to_login")}
             </Link>
           </p>
         </div>

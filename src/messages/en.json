@@ -169,7 +169,17 @@
     "generic_error": "An error occurred. Please try again.",
     "email_in_use": "This email address is already in use. Try signing in.",
     "email_confirm_note": "We sent a confirmation link to your email.",
-    "kvkk": "I consent to the processing of my personal data."
+    "kvkk": "I consent to the processing of my personal data.",
+    "forgot_password_title": "Forgot Password",
+    "forgot_password_subtitle": "Enter your email and we'll send you a password reset link.",
+    "send_reset_link": "Send Reset Link",
+    "reset_email_sent_title": "Email sent",
+    "reset_email_sent_note": "A password reset link has been sent to your email. Check your inbox.",
+    "back_to_login": "Back to login",
+    "reset_password_title": "Set New Password",
+    "reset_password_subtitle": "Create a new password for your account.",
+    "reset_password_btn": "Update Password",
+    "reset_link_invalid": "Link is invalid or expired. Please try again."
   },
   "dashboard": {
     "title": "My Account",

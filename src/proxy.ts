@@ -56,6 +56,14 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  // /sifre-yenile requires an active recovery session
+  if (pathname.includes("/sifre-yenile") && !user) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/${locale}/sifremi-unuttum`;
+    url.search = "";
+    return NextResponse.redirect(url);
+  }
+
   // Redirect logged-in users away from auth pages
   if (user && (pathname.includes("/giris") || pathname.includes("/kayit"))) {
     const url = request.nextUrl.clone();

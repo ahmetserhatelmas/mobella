@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/tr/hesabim";
+  const next = searchParams.get("next") ?? "/hesabim";
 
   if (code) {
     const supabase = await createClient();
@@ -14,5 +14,5 @@ export async function GET(request: Request) {
     }
   }
 
-  return NextResponse.redirect(`${origin}/tr/giris?error=auth`);
+  return NextResponse.redirect(`${origin}/giris?error=auth`);
 }
