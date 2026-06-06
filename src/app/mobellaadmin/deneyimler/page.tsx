@@ -1,10 +1,11 @@
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/server";
 import Link from "next/link";
-import { CheckCircle, XCircle, ExternalLink } from "lucide-react";
+import { CheckCircle, XCircle, ExternalLink, Plus } from "lucide-react";
+import { ExperienceRowActions } from "@/components/admin/ExperienceRowActions";
 import type { Experience } from "@/lib/supabase/types";
 
 export default async function AdminDeneyimlerPage() {
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { data: rawExp } = await supabase
     .from("experiences")
     .select("*")
@@ -20,6 +21,13 @@ export default async function AdminDeneyimlerPage() {
             {experiences?.length ?? 0} deneyim
           </p>
         </div>
+        <Link
+          href="/mobellaadmin/deneyimler/yeni"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[#0A4D68] text-white rounded-lg text-sm font-medium hover:bg-[#083d54] transition-colors"
+        >
+          <Plus className="w-4 h-4" />
+          Yeni Deneyim
+        </Link>
       </div>
 
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -27,7 +35,7 @@ export default async function AdminDeneyimlerPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50">
-                {["Kod", "İsim", "Süre", "Fiyat", "Durum", "Siteye Bak"].map((h) => (
+                {["Sıra", "Kod", "İsim", "Süre", "Fiyat", "Durum", "Siteye Bak", ""].map((h) => (
                   <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     {h}
                   </th>
@@ -36,10 +44,13 @@ export default async function AdminDeneyimlerPage() {
             </thead>
             <tbody className="divide-y divide-gray-50">
               {experiences?.map((exp) => (
-                <tr key={exp.id} className="hover:bg-gray-50">
+                <tr key={exp.id} className={`hover:bg-gray-50 ${!exp.is_active ? "opacity-60" : ""}`}>
+                  <td className="px-4 py-3 text-gray-500 font-mono text-xs">{exp.sort_order}</td>
                   <td className="px-4 py-3 font-mono text-xs text-gray-500">{exp.code}</td>
                   <td className="px-4 py-3">
-                    <p className="font-medium text-gray-900">{exp.name_tr}</p>
+                    <Link href={`/mobellaadmin/deneyimler/${exp.id}`} className="font-medium text-gray-900 hover:text-[#0A4D68]">
+                      {exp.name_tr}
+                    </Link>
                     <p className="text-gray-400 text-xs">{exp.name_en}</p>
                   </td>
                   <td className="px-4 py-3 text-gray-600">
@@ -60,23 +71,24 @@ export default async function AdminDeneyimlerPage() {
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <Link
-                      href={`/tr/deneyimler/${exp.slug}`}
-                      target="_blank"
-                      className="text-[#0A4D68] hover:text-[#FF6B47] transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </Link>
+                    {exp.is_active && (
+                      <Link
+                        href={`/tr/deneyimler/${exp.slug}`}
+                        target="_blank"
+                        className="text-[#0A4D68] hover:text-[#FF6B47] transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </Link>
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
+                    <ExperienceRowActions id={exp.id} name={exp.name_tr} />
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </div>
-
-      <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-xl text-sm text-amber-800">
-        💡 Deneyim içerikleri ve fiyatları güncellemek için Supabase dashboard'undan doğrudan düzenleyebilirsiniz.
       </div>
     </div>
   );

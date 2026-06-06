@@ -7,12 +7,18 @@ const intlMiddleware = createIntlMiddleware(routing);
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const isAdminRoute = pathname.startsWith("/mobellaadmin");
 
-  // Run next-intl locale routing first (handles /giris → /tr/giris rewrites etc.)
-  const intlResponse = intlMiddleware(request);
+  // Admin panel lives outside locale routing — skip next-intl rewrite
+  const intlResponse = isAdminRoute ? null : intlMiddleware(request);
 
   // If next-intl issued a redirect (e.g. locale prefix normalisation), honour it
-  if (intlResponse.status === 301 || intlResponse.status === 302 || intlResponse.headers.get("location")) {
+  if (
+    intlResponse &&
+    (intlResponse.status === 301 ||
+      intlResponse.status === 302 ||
+      intlResponse.headers.get("location"))
+  ) {
     return intlResponse;
   }
 

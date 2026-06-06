@@ -24,35 +24,35 @@ export default async function AdminDashboard() {
       value: total,
       icon: <Calendar className="w-5 h-5" />,
       color: "bg-blue-50 text-blue-600",
-      href: "/admin/rezervasyonlar",
+      href: "/mobellaadmin/rezervasyonlar",
     },
     {
       label: "Bekleyen",
       value: pending,
       icon: <Clock className="w-5 h-5" />,
       color: "bg-amber-50 text-amber-600",
-      href: "/admin/rezervasyonlar",
+      href: "/mobellaadmin/rezervasyonlar",
     },
     {
       label: "Onaylanan",
       value: confirmed,
       icon: <CheckCircle className="w-5 h-5" />,
       color: "bg-green-50 text-green-600",
-      href: "/admin/rezervasyonlar",
+      href: "/mobellaadmin/rezervasyonlar",
     },
     {
       label: "Aktif Deneyim",
       value: expCount,
       icon: <Package className="w-5 h-5" />,
       color: "bg-[#F5E6CA] text-[#0A4D68]",
-      href: "/admin/deneyimler",
+      href: "/mobellaadmin/deneyimler",
     },
     {
       label: "Bülten Abonesi",
       value: subCount,
       icon: <Mail className="w-5 h-5" />,
       color: "bg-purple-50 text-purple-600",
-      href: "/admin/bulten",
+      href: "/mobellaadmin/bulten",
     },
   ];
 
@@ -80,11 +80,11 @@ export default async function AdminDashboard() {
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <h2 className="font-semibold text-gray-900 mb-4">Hızlı Bağlantılar</h2>
         <div className="grid grid-cols-2 gap-3">
-          <Link href="/admin/rezervasyonlar" className="px-4 py-3 bg-[#0A4D68] text-white rounded-lg text-sm font-medium hover:bg-[#083d54] transition-colors text-center">
+          <Link href="/mobellaadmin/rezervasyonlar" className="px-4 py-3 bg-[#0A4D68] text-white rounded-lg text-sm font-medium hover:bg-[#083d54] transition-colors text-center">
             Rezervasyonları Gör
           </Link>
-          <Link href="/admin/tarihler" className="px-4 py-3 bg-[#F5E6CA] text-[#0A4D68] rounded-lg text-sm font-medium hover:bg-[#ecddb0] transition-colors text-center">
-            Tarih Ekle
+          <Link href="/mobellaadmin/deneyimler/yeni" className="px-4 py-3 bg-[#F5E6CA] text-[#0A4D68] rounded-lg text-sm font-medium hover:bg-[#ecddb0] transition-colors text-center">
+            Deneyim Ekle
           </Link>
         </div>
       </div>
