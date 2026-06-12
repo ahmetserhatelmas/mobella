@@ -4,7 +4,13 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Menu, Globe, User, LogOut, LayoutDashboard } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -80,8 +86,8 @@ export function Navbar({ locale }: NavbarProps) {
             <Image
               src={!scrolled && isHome ? "/mobella-logo-light.png" : "/mobella-logo.png"}
               alt="Mobella"
-              width={140}
-              height={56}
+              width={506}
+              height={363}
               className="h-12 lg:h-14 w-auto object-contain transition-all"
               priority
             />
@@ -211,13 +217,17 @@ export function Navbar({ locale }: NavbarProps) {
                 </button>
               </SheetTrigger>
               <SheetContent side="right" className="w-72">
+                <SheetTitle className="sr-only">{t("menu")}</SheetTitle>
+                <SheetDescription className="sr-only">
+                  {locale === "tr" ? "Site navigasyonu" : "Site navigation"}
+                </SheetDescription>
                 <div className="flex flex-col gap-1 mt-8">
                   <Link href="/" className="flex items-center mb-6">
                     <Image
                       src="/mobella-logo.png"
                       alt="Mobella"
-                      width={110}
-                      height={44}
+                      width={506}
+                      height={363}
                       className="h-9 w-auto object-contain"
                     />
                   </Link>
@@ -231,10 +241,10 @@ export function Navbar({ locale }: NavbarProps) {
                       {link.label}
                     </Link>
                   ))}
-                  <div className="mt-4 pt-4 border-t space-y-2">
+                  <div className="mt-4 pt-4 border-t flex flex-col gap-3">
                     {user ? (
                       <>
-                        <Link href="/hesabim" onClick={() => setOpen(false)}>
+                        <Link href="/hesabim" onClick={() => setOpen(false)} className="block">
                           <Button variant="outline" className="w-full justify-start gap-2">
                             <LayoutDashboard className="w-4 h-4" />
                             {t("myAccount")}
@@ -250,12 +260,12 @@ export function Navbar({ locale }: NavbarProps) {
                       </>
                     ) : (
                       <>
-                        <Link href="/giris" onClick={() => setOpen(false)}>
-                          <Button variant="outline" className="w-full">
+                        <Link href="/giris" onClick={() => setOpen(false)} className="block">
+                          <Button className="w-full bg-[#0A4D68] hover:bg-[#083d54] text-white">
                             {t("login")}
                           </Button>
                         </Link>
-                        <Link href="/iletisim" onClick={() => setOpen(false)}>
+                        <Link href="/iletisim" onClick={() => setOpen(false)} className="block">
                           <Button className="w-full bg-[#FF6B47] hover:bg-[#e55a38] text-white">
                             {t("bookNow")}
                           </Button>
