@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mountain, Calendar, Mail, MessageSquare, Package } from "lucide-react";
+import { AdminLogoutButton } from "@/components/admin/AdminLogoutButton";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -46,6 +47,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               >
                 ← Siteye Dön
               </Link>
+              <AdminLogoutButton />
             </div>
           </aside>
 

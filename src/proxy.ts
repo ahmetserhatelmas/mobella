@@ -2,12 +2,38 @@ import createIntlMiddleware from "next-intl/middleware";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
+import {
+  isAdminAuthenticated,
+  isProtectedAdminApi,
+} from "./lib/admin-auth";
 
 const intlMiddleware = createIntlMiddleware(routing);
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const isAdminRoute = pathname.startsWith("/mobellaadmin");
+  const isAdminLogin = pathname === "/mobellaadmin/giris";
+  const adminAuthenticated = isAdminAuthenticated(request);
+
+  if (isProtectedAdminApi(pathname) && !adminAuthenticated) {
+    return NextResponse.json({ error: "Yetkisiz erişim." }, { status: 401 });
+  }
+
+  if (isAdminRoute) {
+    if (!adminAuthenticated && !isAdminLogin) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/mobellaadmin/giris";
+      url.searchParams.set("from", pathname);
+      return NextResponse.redirect(url);
+    }
+
+    if (adminAuthenticated && isAdminLogin) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/mobellaadmin";
+      url.search = "";
+      return NextResponse.redirect(url);
+    }
+  }
 
   // Admin panel lives outside locale routing — skip next-intl rewrite
   const intlResponse = isAdminRoute ? null : intlMiddleware(request);
